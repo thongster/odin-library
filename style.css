@@ -92,9 +92,12 @@ header {
     display: none;
 }
 
-.removeBook {
+button {
     border-radius: 16px;
     padding: 4px 8px 4px 8px;
+}
+
+.removeBook {
     width: fit-content;
     margin-top: auto;
     margin-left: auto;

@@ -4,6 +4,10 @@ const display = document.querySelector(".display");
 const newBook = document.querySelector(".newBook");
 const bookForm = document.querySelector(".bookForm");
 
+// const removeBook = document.createElement("button");
+// removeBook.classList.add("removeBook");
+// removeBook.textContent = "Remove Book";
+
 let count = 2;
 
 // book object constructor
@@ -29,8 +33,6 @@ function addBookToLibrary(title, author, pages, read) {
 function displayLibrary(myLibrary) {
     // loop through library array
     myLibrary.forEach(function(item) {
-        const card = document.createElement("div");
-        card.classList.add("card");
 
         // loop through each key value pair and display if not id or info statement
         for (let prop in item) {
@@ -54,15 +56,47 @@ function displayNewBook() {
     card.classList.add("card");
     // last item in the myLibrary array
     let newItem = myLibrary[myLibrary.length - 1];
+    // loop through all keys in new book
     for (let prop in newItem) {
             if (prop != "id" && prop != "info") {
                 const bookProp = document.createElement("p");
-                card.append(bookProp);
                 bookProp.textContent = `${prop}: ${newItem[prop]}`;
+                card.append(bookProp);
+    
             };
         };
+    // set html data-id attribute to reference on remove
+    card.setAttribute("data-id", newItem.id);    
+    
+    // display remove button
+    const removeBook = document.createElement("button");
+    removeBook.textContent = "Remove Book";
+    removeBook.classList.add("removeBook");
+
     display.append(card);
+    card.append(removeBook);
+
+    removeBook.addEventListener("click", function() {
+        // select the appropriate "card" div
+        let parent = removeBook.parentElement;
+
+        // find index of matching id's
+        let index = myLibrary.findIndex(function(book) {
+            return book.id === parent.dataset.id;
+        });
+
+        // remove according to index
+        myLibrary.splice(index, 1);
+
+        // remove card from DOM
+        parent.remove();
+    });
 };
+
+// delete book
+function deleteBook() {
+
+}
 
 // show / hide form on click
 newBook.addEventListener("click", function() {
@@ -76,7 +110,7 @@ newBook.addEventListener("click", function() {
     count++;
 });
 
-
+// add book form listener
 bookForm.addEventListener("submit", function(e) {
     let title;
     let author;
@@ -101,10 +135,11 @@ bookForm.addEventListener("submit", function(e) {
 
 
 
+
 addBookToLibrary("the war of art", "some guy", "100", "read");
 addBookToLibrary("All I Do Is Win", "T Pain", "12", "not read")
 addBookToLibrary("Atomic Habits", "James Clear", "320", "read");
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "310", "not read");
 addBookToLibrary("The Subtle Art of Not Giving a F*ck", "Mark Manson", "224", "not read");
 
-displayLibrary(myLibrary)
+// displayLibrary(myLibrary)
