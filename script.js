@@ -2,7 +2,6 @@ const myLibrary = [];
 
 const display = document.querySelector(".display");
 const newBook = document.querySelector(".newBook");
-const formSection = document.querySelector(".formsection");
 const bookForm = document.querySelector(".bookForm");
 
 let count = 2;
@@ -20,7 +19,7 @@ function Book(title, author, pages, read) {
   this.info = function() {
     return `${title} by ${author}, ${pages} pages, ${read}`;
   };
-  return console.log(this.info());
+  return;
 };
 
 function addBookToLibrary(title, author, pages, read) {
@@ -45,7 +44,23 @@ function displayLibrary(myLibrary) {
     });
 };
 
+// add new book to the display
+function displayNewBook() {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    // last item in the myLibrary array
+    let newItem = myLibrary[myLibrary.length - 1];
+    for (let prop in newItem) {
+            if (prop != "id" && prop != "info") {
+                const bookProp = document.createElement("p");
+                card.append(bookProp);
+                bookProp.textContent = `${prop}: ${newItem[prop]}`;
+            };
+        };
+    display.append(card);
+};
 
+// show / hide form on click
 newBook.addEventListener("click", function() {
     if (count % 2 === 1) {
         bookForm.classList.add("bookShow")
@@ -57,10 +72,34 @@ newBook.addEventListener("click", function() {
     count++;
 });
 
-addBookToLibrary("the war of art", "some guy", "100", "has been read");
-addBookToLibrary("All I Do Is Win", "T Pain", "12", "has not been read")
-addBookToLibrary("Atomic Habits", "James Clear", "320", "has been read");
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "310", "has been read");
-addBookToLibrary("The Subtle Art of Not Giving a F*ck", "Mark Manson", "224", "has been read");
+bookForm.addEventListener("submit", function(e) {
+    let title;
+    let author;
+    let pages;
+    let read;
+    e.preventDefault();
+    const formData = new FormData(bookForm);
+    for (const [key, value] of formData) {
+        if (key === "title") {
+            title = value;
+        } else if (key === "author") {
+            author = value;
+        } else if (key === "pages") {
+            pages = value;
+        } else if (key === "read") {
+            read = value;
+        }
+    };
+    addBookToLibrary(title, author, pages, read);
+    displayNewBook();
+});
 
-// displayLibrary(myLibrary)
+
+
+addBookToLibrary("the war of art", "some guy", "100", "read");
+addBookToLibrary("All I Do Is Win", "T Pain", "12", "not read")
+addBookToLibrary("Atomic Habits", "James Clear", "320", "read");
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "310", "not read");
+addBookToLibrary("The Subtle Art of Not Giving a F*ck", "Mark Manson", "224", "not read");
+
+displayLibrary(myLibrary)
