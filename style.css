@@ -51,16 +51,44 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid red;
 }
 
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    height: 80px;
+}
+
+.logo {
+    aspect-ratio: 1;
+    height: 100%;
+}
+
+.title {
+
+}
+
+.newBook {
+
+}
+
 .display {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
     height: 400px;
+    padding: 1rem;
 }
 
 .card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     border: 1px solid green;
+    border-radius: 16px;
+    box-shadow: 1px 1px 3px black;
+    padding: 1rem;
+}
+
+.bookShow {
+    display: none;
 }
