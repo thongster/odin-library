@@ -40,6 +40,10 @@ function displayLibrary(myLibrary) {
                 bookProp.textContent = `${prop}: ${item[prop]}`;
             };
         };
+        const removeBook = document.createElement("button");
+        removeBook.classList.add("removeBook");
+        card.append(removeBook);
+        removeBook.textContent = "Remove Book";
         display.append(card);
     });
 };
@@ -71,6 +75,7 @@ newBook.addEventListener("click", function() {
     };    
     count++;
 });
+
 
 bookForm.addEventListener("submit", function(e) {
     let title;
