@@ -20,7 +20,24 @@
         </div>
     </header>
     <div class="formsection">
-        <form class="bookForm bookShow" action="">text here inside form</form>
+        <form class="bookForm bookShow" action="/submit" method="post">
+            <label for="title">Book Title:</label>
+            <input type="text" name="title" id="title" required>
+
+            <label for="author">Author:</label>
+            <input type="text" name="author" id="author" required>
+
+            <label for="pages"># of Pages:</label>
+            <input type="number" name="pages" id="pages" required min="1">
+
+            <label for="read">Status:</label>
+            <select name="read" id="read" required>
+                <option value="Read">Read</option>
+                <option value="Not Read">Not Read</option>
+            </select>
+            
+            <button type="button">Add Book</button>
+        </form>
     </div>
     <div class="display">
 
