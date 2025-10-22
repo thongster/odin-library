@@ -4,10 +4,6 @@ const display = document.querySelector(".display");
 const newBook = document.querySelector(".newBook");
 const bookForm = document.querySelector(".bookForm");
 
-// const removeBook = document.createElement("button");
-// removeBook.classList.add("removeBook");
-// removeBook.textContent = "Remove Book";
-
 let count = 2;
 
 // book object constructor
@@ -62,11 +58,20 @@ function displayNewBook() {
                 const bookProp = document.createElement("p");
                 bookProp.textContent = `${prop}: ${newItem[prop]}`;
                 card.append(bookProp);
-    
+
+                if (prop === "Read") {
+                bookProp.textContent = `Read Status: ${newItem[prop]}`;
+                card.append(bookProp);
+                }
             };
         };
     // set html data-id attribute to reference on remove
-    card.setAttribute("data-id", newItem.id);    
+    card.setAttribute("data-id", newItem.id); 
+
+    // display read button
+    const readButton = document.createElement("button");
+    readButton.textContent = "Read Status";
+    readButton.classList.add("readButton");
     
     // display remove button
     const removeBook = document.createElement("button");
@@ -74,7 +79,47 @@ function displayNewBook() {
     removeBook.classList.add("removeBook");
 
     display.append(card);
+    card.append(readButton);
     card.append(removeBook);
+
+    readButton.addEventListener("click", function() {
+        // select the appropriate "card" div
+        let parent = readButton.parentElement;
+
+        // find index of matching id's
+        let index = myLibrary.findIndex(function(book) {
+            return book.id === parent.dataset.id;
+        });
+
+        // find and change read key/value according to matching id
+        if (myLibrary[index].Read === "Read") {
+            myLibrary[index].Read = "Not Read";
+            let thisItem = myLibrary[index];
+            // loop through all keys in new book
+            for (let prop in thisItem) {
+                if (prop === "Read") {
+                    const pList = document.querySelectorAll("p");
+                    console.log(thisItem[prop]);
+                    console.log(pList);
+                    console.log(parent.querySelectorAll("p")[3]);
+                    parent.querySelectorAll("p")[3].textContent = `Read Status ${myLibrary[index].Read}`;
+                    console.log(parent.querySelectorAll("p")[3]);
+                };
+
+            };
+        } else {
+            // myLibrary[index].Read = "Read";
+            // let thisItem = myLibrary[index];
+            // // loop through all keys in new book
+            // for (let prop in thisItem) {
+            //     if (prop === "Not Read") {
+            //         bookProp.textContent = "Read";    
+            //     };
+            // card.append(readButton);
+            // card.append(removeBook);
+            // };
+        };
+    });
 
     removeBook.addEventListener("click", function() {
         // select the appropriate "card" div
@@ -91,12 +136,9 @@ function displayNewBook() {
         // remove card from DOM
         parent.remove();
     });
+
+
 };
-
-// delete book
-function deleteBook() {
-
-}
 
 // show / hide form on click
 newBook.addEventListener("click", function() {
@@ -117,6 +159,7 @@ bookForm.addEventListener("submit", function(e) {
     let pages;
     let read;
     e.preventDefault();
+    // grab form data and loop through to get book info
     const formData = new FormData(bookForm);
     for (const [key, value] of formData) {
         if (key === "title") {
@@ -132,6 +175,7 @@ bookForm.addEventListener("submit", function(e) {
     addBookToLibrary(title, author, pages, read);
     displayNewBook();
 });
+
 
 
 
