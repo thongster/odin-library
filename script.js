@@ -26,25 +26,25 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(new Book(title, author, pages, read));
 };
 
-function displayLibrary(myLibrary) {
-    // loop through library array
-    myLibrary.forEach(function(item) {
+// function displayLibrary(myLibrary) {
+//     // loop through library array
+//     myLibrary.forEach(function(item) {
 
-        // loop through each key value pair and display if not id or info statement
-        for (let prop in item) {
-            if (prop != "id" && prop != "info") {
-                const bookProp = document.createElement("p");
-                card.append(bookProp);
-                bookProp.textContent = `${prop}: ${item[prop]}`;
-            };
-        };
-        const removeBook = document.createElement("button");
-        removeBook.classList.add("removeBook");
-        card.append(removeBook);
-        removeBook.textContent = "Remove Book";
-        display.append(card);
-    });
-};
+//         // loop through each key value pair and display if not id or info statement
+//         for (let prop in item) {
+//             if (prop != "id" && prop != "info") {
+//                 const bookProp = document.createElement("p");
+//                 card.append(bookProp);
+//                 bookProp.textContent = `${prop}: ${item[prop]}`;
+//             };
+//         };
+//         const removeBook = document.createElement("button");
+//         removeBook.classList.add("removeBook");
+//         card.append(removeBook);
+//         removeBook.textContent = "Remove Book";
+//         display.append(card);
+//     });
+// };
 
 // add new book to the display
 function displayNewBook() {
@@ -91,33 +91,14 @@ function displayNewBook() {
             return book.id === parent.dataset.id;
         });
 
-        // find and change read key/value according to matching id
+        // find index of read key/value according to matching id
+        // change to Not Read / Read by find the correct p tag in the DOM
         if (myLibrary[index].Read === "Read") {
             myLibrary[index].Read = "Not Read";
-            let thisItem = myLibrary[index];
-            // loop through all keys in new book
-            for (let prop in thisItem) {
-                if (prop === "Read") {
-                    const pList = document.querySelectorAll("p");
-                    console.log(thisItem[prop]);
-                    console.log(pList);
-                    console.log(parent.querySelectorAll("p")[3]);
-                    parent.querySelectorAll("p")[3].textContent = `Read Status ${myLibrary[index].Read}`;
-                    console.log(parent.querySelectorAll("p")[3]);
-                };
-
-            };
+            parent.querySelectorAll("p")[3].textContent = `Read Status: ${myLibrary[index].Read}`;
         } else {
-            // myLibrary[index].Read = "Read";
-            // let thisItem = myLibrary[index];
-            // // loop through all keys in new book
-            // for (let prop in thisItem) {
-            //     if (prop === "Not Read") {
-            //         bookProp.textContent = "Read";    
-            //     };
-            // card.append(readButton);
-            // card.append(removeBook);
-            // };
+            myLibrary[index].Read = "Read";
+            parent.querySelectorAll("p")[3].textContent = `Read Status: ${myLibrary[index].Read}`
         };
     });
 
@@ -176,14 +157,3 @@ bookForm.addEventListener("submit", function(e) {
     displayNewBook();
 });
 
-
-
-
-
-addBookToLibrary("the war of art", "some guy", "100", "read");
-addBookToLibrary("All I Do Is Win", "T Pain", "12", "not read")
-addBookToLibrary("Atomic Habits", "James Clear", "320", "read");
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "310", "not read");
-addBookToLibrary("The Subtle Art of Not Giving a F*ck", "Mark Manson", "224", "not read");
-
-// displayLibrary(myLibrary)
