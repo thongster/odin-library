@@ -121,15 +121,22 @@ button {
 
 .formsection > form {
     display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(275px, 1fr));
     gap: 1rem;
     padding: 1rem;
+    justify-self: center;
+}
+
+@media (max-width: 599px) {
+        .formsection > form {
+        grid-template-columns: 1fr;
+    }
 }
 
 .formsection > form > div:nth-child(1), .formsection > form > div:nth-child(2)  {
     display: flex;
     flex-direction: column;
-    text-align: center;
+
 }
 
 .formsection > form > div:nth-child(3) {
