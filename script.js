@@ -89,21 +89,21 @@ function displayNewBook() {
 
     readButton.addEventListener("click", function() {
         // select the appropriate "card" div
-        let parent = readButton.parentElement;
+        let grandparent = readButton.parentElement.parentElement;
 
         // find index of matching id's
         let index = myLibrary.findIndex(function(book) {
-            return book.id === parent.dataset.id;
+            return book.id === grandparent.dataset.id;
         });
 
         // find index of read key/value according to matching id
         // change to Not Read / Read by find the correct p tag in the DOM
         if (myLibrary[index].Read === "Read") {
             myLibrary[index].Read = "Not Read";
-            parent.querySelectorAll("p")[3].textContent = `Read Status: ${myLibrary[index].Read}`;
+            grandparent.querySelectorAll("p")[3].textContent = `Read Status: ${myLibrary[index].Read}`;
         } else {
             myLibrary[index].Read = "Read";
-            parent.querySelectorAll("p")[3].textContent = `Read Status: ${myLibrary[index].Read}`
+            grandparent.querySelectorAll("p")[3].textContent = `Read Status: ${myLibrary[index].Read}`
         };
     });
 

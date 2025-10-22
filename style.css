@@ -47,8 +47,14 @@ h1, h2, h3, h4, h5, h6 {
    New CSS below here 
 */
 
-* {
-    border: 1px solid red;
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    height: 100%;
+    margin-bottom: 4rem;
 }
 
 header {
@@ -74,7 +80,7 @@ header {
 
 .display {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
     padding: 1rem;
 }
@@ -141,18 +147,40 @@ input[type="text"], input[type="number"] {
     background-color: #dfdfdf;
 }
 
+select {
+    border-radius: 6px;
+    background-color: #dfdfdf;
+    height: 100%;
+}
+
 option {
     text-align: center;
 }
 
-input:invalid {
+
+
+input:invalid, select:invalid {
     border: 1px solid red;
 }
 
-input:valid {
+input:valid, select:valid {
     border: 1px solid green;
 }
 
-input:focus {
+input:focus, select:focus {
     border: 1px solid blue;
+}
+
+.footer {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  padding-top: 0.5rem;
+  height: 3rem;
+  border-top: 2px solid rgb(0, 0, 0);
+}
+
+.footer a {
+  color: black;
 }
