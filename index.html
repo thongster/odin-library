@@ -19,24 +19,28 @@
             <button class="newBook">New Book</button>
         </div>
     </header>
-    <div class="formsection">
-        <form class="bookForm bookShow" method="post">
-            <label for="title">Book Title:</label>
-            <input type="text" name="title" id="title" required>
+    <div class="formsection bookShow">
+        <form class="bookForm" method="post">
+            <div>
+                <label for="title">Book Title:</label>
+                <input type="text" name="title" id="title" required>
+                <label for="author">Author:</label>
+                <input type="text" name="author" id="author" required>
+            </div>
 
-            <label for="author">Author:</label>
-            <input type="text" name="author" id="author" required>
-
-            <label for="pages"># of Pages:</label>
-            <input type="number" name="pages" id="pages" required min="1">
-
-            <label for="read">Status:</label>
-            <select name="read" id="read" required>
-                <option value="Read">Read</option>
-                <option value="Not Read">Not Read</option>
-            </select>
+            <div>
+                <label for="pages"># of Pages:</label>
+                <input type="number" name="pages" id="pages" required min="1">
+                <label for="read">Status:</label>
+                <select name="read" id="read" required>
+                    <option value="Read">Read</option>
+                    <option value="Not Read">Not Read</option>
+                </select>
+            </div>
             
-            <button type="submit" class="addBookButton">Add Book</button>
+            <div>
+                <button type="submit" class="addBookButton">Add Book</button>
+            </div>
         </form>
     </div>
     <div class="display">

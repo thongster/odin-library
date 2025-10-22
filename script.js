@@ -2,6 +2,7 @@ const myLibrary = [];
 
 const display = document.querySelector(".display");
 const newBook = document.querySelector(".newBook");
+const formSection = document.querySelector(".formsection");
 const bookForm = document.querySelector(".bookForm");
 
 let count = 2;
@@ -108,18 +109,20 @@ function displayNewBook() {
 
     removeBook.addEventListener("click", function() {
         // select the appropriate "card" div
-        let parent = removeBook.parentElement;
+        let grandparent = removeBook.parentElement.parentElement;
 
         // find index of matching id's
         let index = myLibrary.findIndex(function(book) {
-            return book.id === parent.dataset.id;
+            console.log(grandparent);
+            console.log(grandparent.dataset.id)
+            return book.id === grandparent.dataset.id;
         });
 
         // remove according to index
         myLibrary.splice(index, 1);
 
         // remove card from DOM
-        parent.remove();
+        grandparent.remove();
     });
 
 
@@ -128,11 +131,11 @@ function displayNewBook() {
 // show / hide form on click
 newBook.addEventListener("click", function() {
     if (count % 2 === 1) {
-        bookForm.classList.add("bookShow")
+        formSection.classList.add("bookShow")
     };
     
     if (count % 2 === 0) {
-        bookForm.classList.remove("bookShow")
+        formSection.classList.remove("bookShow")
     };    
     count++;
 });
