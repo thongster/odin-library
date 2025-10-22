@@ -68,6 +68,9 @@ function displayNewBook() {
     // set html data-id attribute to reference on remove
     card.setAttribute("data-id", newItem.id); 
 
+    const bookButtons = document.createElement("div");
+    bookButtons.classList.add("bookButtons");
+
     // display read button
     const readButton = document.createElement("button");
     readButton.textContent = "Read Status";
@@ -79,8 +82,9 @@ function displayNewBook() {
     removeBook.classList.add("removeBook");
 
     display.append(card);
-    card.append(readButton);
-    card.append(removeBook);
+    card.append(bookButtons);
+    bookButtons.append(readButton);
+    bookButtons.append(removeBook);
 
     readButton.addEventListener("click", function() {
         // select the appropriate "card" div

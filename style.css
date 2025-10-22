@@ -74,7 +74,7 @@ header {
 
 .display {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
     padding: 1rem;
 }
@@ -97,18 +97,18 @@ button {
     padding: 4px 8px 4px 8px;
 }
 
-.removeBook {
+.bookButtons {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.removeBook {
     width: fit-content;
-    margin-top: auto;
-    margin-left: auto;
-    background-color: rgb(199, 230, 255);
+    background-color: #c7e6ff;
 }
 
 .readButton {
-    display: flex;
     width: fit-content;
-    margin-top: auto;
-    margin-right: auto;
     background-color: #c7ffc7;
 }
