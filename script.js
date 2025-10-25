@@ -8,20 +8,35 @@ const bookForm = document.querySelector(".bookForm");
 let count = 2;
 
 // book object constructor
-function Book(title, author, pages, read) {
-  if (!new.target) {
-    throw Error("You must use the 'new' operator to call the constructor");
-  }
-  this.Title = title;
-  this.Author = author;
-  this.Pages = pages;
-  this.Read = read;
-  this.id = crypto.randomUUID();
-  this.info = function() {
-    return `${title} by ${author}, ${pages} pages, ${read}`;
-  };
-  return;
+
+class Book {
+    constructor(title, author, pages, read) {
+        this.Title = title;
+        this.Author = author;
+        this.Pages = pages;
+        this.Read = read;
+        this.id = crypto.randomUUID();
+        this.info = function() {
+            return `${title} by ${author}, ${pages} pages, ${read}`;
+        };
+    };
+
 };
+
+// function Book(title, author, pages, read) {
+//   if (!new.target) {
+//     throw Error("You must use the 'new' operator to call the constructor");
+//   }
+//   this.Title = title;
+//   this.Author = author;
+//   this.Pages = pages;
+//   this.Read = read;
+//   this.id = crypto.randomUUID();
+//   this.info = function() {
+//     return `${title} by ${author}, ${pages} pages, ${read}`;
+//   };
+//   return;
+// };
 
 function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(new Book(title, author, pages, read));
@@ -113,8 +128,6 @@ function displayNewBook() {
 
         // find index of matching id's
         let index = myLibrary.findIndex(function(book) {
-            console.log(grandparent);
-            console.log(grandparent.dataset.id)
             return book.id === grandparent.dataset.id;
         });
 
